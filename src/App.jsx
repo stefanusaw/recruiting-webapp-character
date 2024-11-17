@@ -17,8 +17,8 @@ function App() {
   );
   const [remainingPoints, setRemainingPoints] = useState(0); //task 5
 
-  const API_URL = 'https://api/route';
-  // const API_URL = 'https://recruiting.verylongdomaintotestwith.ca/api/{stefanusaw}/character';
+  // const API_URL = 'https://api/route';
+  const API_URL = 'https://recruiting.verylongdomaintotestwith.ca/api/{stefanusaw}/character';
   // const API_URL = 'https://recruiting.verylongdomaintotestwith.ca/api/stefanusaw/character';
 
 
@@ -34,11 +34,11 @@ function App() {
       }
       const characterData = await response.json();
       console.log('Fetched character data: ', characterData);
-      if (characterData){
-        setAttributes(characterData.attributes);
-        setSkills(characterData.skills);
-        setSelectedClass(characterData.selectedClass);
-        setRemainingPoints(characterData.remainingPoints);
+      if (characterData.body && characterData.body.attributes){
+        setAttributes(characterData.body.attributes);
+        setSkills(characterData.body.skills);
+        setSelectedClass(characterData.body.selectedClass);
+        setRemainingPoints(characterData.body.remainingPoints);
       } else {
         console.error('Data missing or malformed in the API response');
       }
@@ -48,7 +48,7 @@ function App() {
   };
 
   const handlePostRequest = async () => {
-    const characterData = { attributes, skills, selectedClass, totalAttributePoints, };
+    const characterData = { attributes, skills, selectedClass, remainingPoints };
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
