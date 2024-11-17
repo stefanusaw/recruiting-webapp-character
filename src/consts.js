@@ -57,3 +57,7 @@ export const SKILL_LIST = [
     { name: 'Survival', attributeModifier: 'Wisdom' },
 
 ]
+
+export const calculateModifier = (score) => Math.floor((score - 10) / 2);
+export const calculateSkillPoints = (intelligenceModifier) => 10 + (4 * intelligenceModifier);
+export const MAX_ATTRIBUTE_VALUE = 70;
